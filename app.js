@@ -16,12 +16,14 @@ const globalErrorHandler = require("./controllers/globalErrorHandling");
 const chequesRouter = require("./routers/chequesRouter");
 const app = express();
 
-app.use(express.static(`${__dirname}/public`));
 /*=================================Middlewares=====================================*/
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+const cors = require("cors");
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const rateLimit = rateLimiter({
   max: 100,
@@ -38,8 +40,8 @@ app.use((req, res, next) => {
   req.RequestTime = new Date().toISOString();
   next();
 });
+app.use(cors());
 
-app.use(express.static(`${__dirname}/starter/public`));
 /*=================================Using Routers=====================================*/
 
 app.use("/api/v1/cheques", chequesRouter);

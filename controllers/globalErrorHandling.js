@@ -27,20 +27,12 @@ const handleExpiredToken = (error) => {
 };
 
 const sendDevelopmentError = (err, req, res) => {
-  if (req.originalUrl.startsWith("/api")) {
-    res.status(err.errStatusCode).json({
-      status: err.errStatus,
-      err: err,
-      message: err.message,
-      stack: err.stack,
-    });
-  } else {
-    console.error("error💥", err);
-    res.status(err.errStatusCode).render("error", {
-      title: "something went very wrong",
-      msg: err.message,
-    });
-  }
+  res.status(err.errStatusCode).json({
+    status: err.errStatus,
+    err: err,
+    message: err.message,
+    stack: err.stack,
+  });
 };
 
 const sendProductionError = (err, req, res) => {
