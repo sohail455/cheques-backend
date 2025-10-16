@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const AppError = require("./utils/ErrorHandling");
 const globalErrorHandler = require("./controllers/globalErrorHandling");
 const chequesRouter = require("./routers/chequesRouter");
+const printerRouter = require("./routers/printersRouter");
 const app = express();
 
 /*=================================Middlewares=====================================*/
@@ -45,6 +46,7 @@ app.use(cors());
 /*=================================Using Routers=====================================*/
 
 app.use("/api/v1/cheques", chequesRouter);
+app.use("/api/v1/printers", printerRouter);
 
 app.all("*", (req, res, next) => {
   const err = new AppError(`can't find ${req.originalUrl} in this server`, 404);
