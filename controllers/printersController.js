@@ -10,7 +10,6 @@ exports.createPrinter = catchAsynchError(async (req, res, next) => {
     status: "success",
     data: { printer },
   });
-  next();
 });
 
 // Read One
@@ -21,7 +20,6 @@ exports.getPrinter = catchAsynchError(async (req, res, next) => {
     status: "success",
     data: { printer },
   });
-  next();
 });
 
 // Read All with features
@@ -38,7 +36,6 @@ exports.getPrinters = catchAsynchError(async (req, res, next) => {
     results: printerList.length,
     data: { printerList },
   });
-  next();
 });
 
 // Update
@@ -52,7 +49,6 @@ exports.updatePrinter = catchAsynchError(async (req, res, next) => {
     status: "success",
     data: { printer },
   });
-  next();
 });
 
 // Delete
@@ -63,5 +59,4 @@ exports.deletePrinter = catchAsynchError(async (req, res, next) => {
     status: "success",
     data: null,
   });
-  next();
 });

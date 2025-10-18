@@ -1,10 +1,14 @@
 // routes/chequeRoutes.js
 const express = require("express");
 const controller = require("../controllers/chequesController");
+const upload = require("../utils/uploads");
 
 const router = express.Router();
 
-router.route("/").get(controller.getCheques).post(controller.createCheque);
+router
+  .route("/")
+  .get(controller.getCheques)
+  .post(upload.single("photo"), controller.createCheque);
 
 router
   .route("/:id")
