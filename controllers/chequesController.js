@@ -53,8 +53,6 @@ exports.createCheque = catchAsynchError(async (req, res, next) => {
     return next(new AppError("width and height are required numbers", 400));
   }
 
-  console.log("createCheque pre-insert:", body);
-
   const cheque = await Cheque.create(body);
 
   return res.status(201).json({ status: "success", data: { cheque } });
@@ -97,10 +95,12 @@ exports.getCheques = catchAsynchError(async (req, res, next) => {
 
 // Update
 exports.updateCheque = catchAsynchError(async (req, res, next) => {
-  const cheque = await Cheque.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  console.log(req.body);
+  const cheque = await Cheque.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    { new: true, runValidators: true }
+  );
   if (!cheque) return next(new AppError("Cheque not found", 404));
   res.status(200).json({
     status: "success",
